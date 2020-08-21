@@ -1,0 +1,221 @@
+\documentclass[letterpaper,12pt]{article}
+
+% Disable the \showhypens warnings, use with package microtype
+\let\CheckCommand\providecommand
+
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{geometry}
+	\geometry{top=2.6cm,bottom=2.6cm,left=2.6cm,right=2.6cm}
+\usepackage{graphicx}
+\usepackage{indentfirst}
+	\setlength\parindent{3em}
+\usepackage{lineno}
+	\linenumbers
+	%\modulolinenumbers[5]
+\usepackage{microtype}
+\usepackage{multirow}
+\usepackage[round, compress]{natbib}
+	\renewcommand{\bibsection}{\section*{REFERENCES}}
+\usepackage{setspace}
+	\setstretch{2.0}
+\usepackage{soul}
+\usepackage{titlesec}
+	\titleformat{\section}{\bfseries\normalfont}{\bfseries\thesection}{1em}{\bfseries}
+	\titleformat{\subsection}{\bfseries\normalfont}{\bfseries\thesubsection}{1em}{\bfseries}
+	\titleformat{\subsubsection}{\bfseries\normalfont}{\bfseries\thesubsubsection}{1em}{\bfseries}
+	\titlespacing*{\section}{0pt}{2\baselineskip}{0pt}
+	\titlespacing*{\subsection}{0pt}{1\baselineskip}{0pt}
+	\titlespacing*{\subsubsection}{0pt}{1\baselineskip}{0pt}
+\usepackage{upgreek}
+\usepackage{xcolor}
+
+% switch among fonts
+%\usepackage{mathpazo}
+%\usepackage{times}
+%\usepackage{txfonts}
+\usepackage[scaled]{helvet}
+\renewcommand\familydefault{\sfdefault}
+\usepackage[T1]{fontenc}
+\usepackage{sfmath}
+
+% Use customized Figure and Table label: Fig. 1 ... and Table 1 ...
+% This template does not use \caption to make it compatible with lineno package
+\makeatletter
+\renewcommand{\figurename}{Fig.}
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip\normalsize
+  \sbox\@tempboxa{#1: #2}%
+  \ifdim \wd\@tempboxa >\hsize
+    \textbf{#1} #2\par
+  \else
+    \centering
+    \textbf{#1} #2\par
+  \fi
+  \vskip\belowcaptionskip}
+\makeatother
+
+% Raggedright with indent
+%\raggedright
+%\setlength\parindent{3em}
+
+% To penalize hyphen
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+
+
+
+\begin{document}
+
+\setlength{\abovedisplayskip}{0pt}
+\setlength{\belowdisplayskip}{0pt}
+
+
+
+
+% Title page
+{
+\centering
+\par \noindent Title
+\par \noindent Author$^{1,*}$
+
+\flushleft
+\par \noindent $^{1}$ Institute
+\par \noindent $^{*}$ Author for correspondence. Email: , Telephone:
+
+% Commonly used institutes
+%
+% Caltech and JPL
+% Division of Geological and Planetary Sciences, California Institute of Technology, Pasadena, California 91125, USA
+% Jet Propulsion Laboratory, California Institute of Technology, Pasadena, California 91109, USA
+%
+% University of California
+% Department of Plant Sciences, University of California Davis, Davis, California 95616, USA
+% Department of Geography, University of California Santa Barbara, Santa Barbara, Clifornia 93106, USA
+%
+% University of Utah
+% School of Biological Sciences, University of Utah, Salt Lake City, Utah 84112, USA
+%
+% Author for correspondence. Email: , Telephone:
+
+\begin{center}
+\par Statistics
+
+\begin{tabular}{lr}
+\hline
+Summary					& words\\
+Main Text				& words\\
+\hline
+Number of Figures		&\\
+Number of Tables		&\\
+Supporting Information	&\\
+\hline
+\end{tabular}
+\end{center}
+}
+
+
+
+
+% Abstract page
+\clearpage
+\section*{ABSTRACT}
+\par Abstract here.
+
+\par \noindent \textbf{Keywords:} keyword 1, keyword 2, keyword 3
+
+
+
+
+% Introduction
+\clearpage
+\section{INTRODUCTION}
+\par Some text. A citation \citep{wang2015stem}. Citation with some text \citep[here is some text before the citation;][]{wang2015stem}. Citation with some text again \citep[][some text after the citation]{holtta2017steady}
+
+
+
+
+% Materials and Methods
+%\clearpage
+\section{MATERIALS AND METHODS}
+\subsection{Plant Materials}
+\subsubsection{Test}
+\par Some text
+\begin{equation}
+	\text{test} = \dfrac{a \cdot \Upgamma}{RT}
+\end{equation}
+
+
+
+
+% Results
+%\clearpage
+\section{RESULTS}
+\par Some text
+
+
+
+
+% Discussion
+%\clearpage
+\section{DISCUSSION}
+\par Some text
+
+
+
+
+% Conclusion
+%\clearpage
+\section{CONCLUSION}
+\par Some text
+
+
+
+
+% Acknowledgments
+%\clearpage
+\section*{ACKNOWLEDGMENTS}
+\par Some text
+
+
+
+
+% Supporting Information
+%\clearpage
+\section*{SUPPORTING INFORMATION}
+\par Some text
+
+
+
+
+% Figures
+\clearpage
+\section*{TABLES}
+\par Some text
+
+
+
+
+% References
+%\clearpage
+\begin{singlespace}
+\bibliographystyle{pce}
+\bibliography{../../data/sample_1, ../../data/sample_2}
+\end{singlespace}
+
+
+
+
+% Figures
+\clearpage
+\section*{FIGURES}
+\par Some text
+
+
+
+
+\end{document}
