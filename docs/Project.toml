@@ -1,0 +1,3 @@
+[deps]
+BibtexLibrary = "bd328fb2-9546-4b00-8bf1-016806514250"
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
