@@ -1,0 +1,10 @@
+name = "BibtexLibrary"
+uuid = "bd328fb2-9546-4b00-8bf1-016806514250"
+authors = ["Yujie Wang <jesiner@gmail.com>"]
+version = "0.0.1"
+
+[deps]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[compat]
+julia = "1.0.5, 1.5"
