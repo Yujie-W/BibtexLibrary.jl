@@ -6,12 +6,14 @@ on:
   pull_request:
 
 jobs:
-  LTS-test:
+  version-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - name: Set up Actions
+        uses: actions/checkout@v1
       - name: Set up Julia
         uses: julia-actions/setup-julia@v1
         with:
-          version: '1.0.5'
-      - run: julia --project -e 'using Pkg; Pkg.test();'
+          version: "1.0.5"
+      - name: Test package
+        run: julia --project -e 'using Pkg; Pkg.test();'
