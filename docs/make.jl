@@ -23,7 +23,6 @@ format = Documenter.HTML(
 makedocs(
     sitename = "BibtexLibrary",
     format = format,
-
     clean = false,
     modules = [BibtexLibrary],
     pages = pages,
@@ -32,5 +31,6 @@ makedocs(
 deploydocs(
     repo = "github.com/Yujie-W/BibtexLibrary.jl.git",
     target = "build",
+    devbranch = "main",
     push_preview = true,
 )
