@@ -2,11 +2,13 @@ name: JuliaStable
 on:
   push:
     branches:
-      - master
+      - main
+      - staging
+      - trying
   pull_request:
 
 jobs:
-  stable-test:
+  linux-test:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Actions
@@ -15,6 +17,10 @@ jobs:
         uses: julia-actions/setup-julia@v1
         with:
           version: "1.5"
+      - name: Force update registry
+        run: julia -e 'using Pkg; Pkg.Registry.rm("General"); Pkg.Registry.add(RegistrySpec(url="https://github.com/JuliaRegistries/General"))'
+      - name: Install Dependencies
+        run: julia --project -e 'ENV["PYTHON"]=""; using Pkg; Pkg.instantiate();'
       - name: Test package
         run: julia --project -e 'using Pkg; Pkg.test(coverage=true);'
       - name: Upload code coverage

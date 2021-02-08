@@ -1,0 +1,6 @@
+status = [
+    "docs-build",
+    "linux-test",
+    "version-test",
+]
+timeout_sec = 7200
