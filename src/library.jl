@@ -52,6 +52,33 @@ end;
 
 """
 
+    merge_library(current_lib::Dict{String, OrderedDict{String, String}}, input_lib::Dict{String, OrderedDict{String, String}})
+
+Merge the input libraries, and return the merged and unmerged libraries, given
+- `current_lib` Current library
+- `input_lib` Input library
+
+"""
+function merge_library(current_lib::Dict{String, OrderedDict{String, String}}, input_lib::Dict{String, OrderedDict{String, String}})
+    merged_library = deepcopy(current_lib);
+    unmerged_library = Dict{String, OrderedDict{String, String}}();
+
+    # add the current library
+    for key in keys(input_lib)
+        if haskey(merged_library, key)
+            @warn "Duplicate key found in the library: $key";
+            unmerged_library[key] = input_lib[key];
+        else
+            merged_library[key] = input_lib[key];
+        end;
+    end;
+
+    return merged_library, unmerged_library
+end;
+
+
+"""
+
     save_bibliography!(library::Dict{String, OrderedDict{String, String}}, outfile::String)
 
 Save the library to a file, given
