@@ -1,6 +1,6 @@
 """
 
-    sync_field!(entry_from::Dict{String, String}, entry_to::Dict{String, String}, field::String; warn_level::Int = 0)
+    sync_field!(entry_from::Dict{String, String}, entry_to::OrderedDict{String, String}, field::String; warn_level::Int = 0)
 
 Synchronize a field from one entry to another, given
 - `entry_from` Source entry
@@ -8,7 +8,7 @@ Synchronize a field from one entry to another, given
 - `field` Field to synchronize
 
 """
-function sync_field!(entry_from::Dict{String, String}, entry_to::Dict{String, String}, field::String; warn_level::Int = 0)
+function sync_field!(entry_from::Dict{String, String}, entry_to::OrderedDict{String, String}, field::String; warn_level::Int = 0)
     if haskey(entry_from, field)
         # if the field is pages
         if field == "pages"
@@ -166,7 +166,7 @@ Format an entry, given
 - `entry` Input entry
 
 """
-function fomart_entry(entry::Dict{String, String})
+function format_entry(entry::Dict{String, String})
     # if entry type is an article
     if lowercase(entry["BIB_TYPE"]) == "article"
         return format_entry_article(entry);
