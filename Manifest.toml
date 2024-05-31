@@ -3,9 +3,28 @@
 [[Base64]]
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 
-[[Distributed]]
-deps = ["Random", "Serialization", "Sockets"]
-uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
+[[Compat]]
+deps = ["TOML", "UUIDs"]
+git-tree-sha1 = "b1c55339b7c6c350ee89f2c1604299660525b248"
+uuid = "34da2185-b29b-5c13-b0c7-acf172513d20"
+version = "4.15.0"
+
+    [Compat.extensions]
+    CompatLinearAlgebraExt = "LinearAlgebra"
+
+    [Compat.weakdeps]
+    Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+    LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+
+[[DataStructures]]
+deps = ["Compat", "InteractiveUtils", "OrderedCollections"]
+git-tree-sha1 = "1d0a14036acb104d9e89698bd408f63ab58cdc82"
+uuid = "864edb3b-99cc-5e75-8d2d-829cb0a9cfe8"
+version = "0.18.20"
+
+[[Dates]]
+deps = ["Printf"]
+uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
 
 [[InteractiveUtils]]
 deps = ["Markdown"]
@@ -18,16 +37,38 @@ uuid = "56ddb016-857b-54e1-b83d-db4d58db5568"
 deps = ["Base64"]
 uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
 
+[[OrderedCollections]]
+git-tree-sha1 = "dfdf5519f235516220579f949664f1bf44e741c5"
+uuid = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
+version = "1.6.3"
+
+[[Printf]]
+deps = ["Unicode"]
+uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
+
 [[Random]]
-deps = ["Serialization"]
+deps = ["SHA"]
 uuid = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+
+[[SHA]]
+uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
+version = "0.7.0"
 
 [[Serialization]]
 uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
 
-[[Sockets]]
-uuid = "6462fe0b-24de-5631-8697-dd941f90decc"
+[[TOML]]
+deps = ["Dates"]
+uuid = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
+version = "1.0.3"
 
 [[Test]]
-deps = ["Distributed", "InteractiveUtils", "Logging", "Random"]
+deps = ["InteractiveUtils", "Logging", "Random", "Serialization"]
 uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[[UUIDs]]
+deps = ["Random", "SHA"]
+uuid = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"
+
+[[Unicode]]
+uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
