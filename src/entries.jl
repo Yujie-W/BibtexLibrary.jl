@@ -1,14 +1,16 @@
 """
 
-    sync_field!(entry_from::Dict{String, String}, entry_to::OrderedDict{String, String}, field::String; warn_level::Int = 0)
+    sync_field!(entry_from::Dict{String, String}, entry_to::OrderedDict{String, String}, field::String; warn_level::Int = 0, pop_warning::Bool = true)
 
 Synchronize a field from one entry to another, given
 - `entry_from` Source entry
 - `entry_to` Destination entry
 - `field` Field to synchronize
+- `warn_level` Warning level
+- `pop_warning` Pop warning
 
 """
-function sync_field!(entry_from::Dict{String, String}, entry_to::OrderedDict{String, String}, field::String; warn_level::Int = 0)
+function sync_field!(entry_from::Dict{String, String}, entry_to::OrderedDict{String, String}, field::String; warn_level::Int = 0, pop_warning::Bool = true)
     if haskey(entry_from, field)
         # if the field is pages
         if field == "pages"
@@ -34,7 +36,7 @@ function sync_field!(entry_from::Dict{String, String}, entry_to::OrderedDict{Str
         else
             entry_to[field] = entry_from[field];
         end;
-    else
+    elseif pop_warning
         if warn_level == 2
             @error "Field $field is missing in the entry: $(entry_from["BIB_KEY"])";
         elseif warn_level == 1
@@ -48,13 +50,14 @@ end;
 
 """
 
-    format_entry_article(entry::Dict{String, String})
+    format_entry_article(entry::Dict{String, String}; pop_warning::Bool = true)
 
 Format an article entry, given
 - `entry` Input entry
+- `pop_warning` Pop warning
 
 """
-function format_entry_article(entry::Dict{String, String})
+function format_entry_article(entry::Dict{String, String}; pop_warning::Bool = true)
     new_entry = OrderedDict{String, String}();
 
     # set the type and key
@@ -62,14 +65,14 @@ function format_entry_article(entry::Dict{String, String})
     new_entry["BIB_KEY"] = entry["BIB_KEY"];
 
     # add the fields to the new entry
-    sync_field!(entry, new_entry, "author"; warn_level = 2);
-    sync_field!(entry, new_entry, "year"; warn_level = 2);
-    sync_field!(entry, new_entry, "title"; warn_level = 2);
-    sync_field!(entry, new_entry, "journal"; warn_level = 2);
-    sync_field!(entry, new_entry, "volume"; warn_level = 2);
-    sync_field!(entry, new_entry, "number"; warn_level = 1);
-    sync_field!(entry, new_entry, "pages"; warn_level = 2);
-    sync_field!(entry, new_entry, "doi"; warn_level = 1);
+    sync_field!(entry, new_entry, "author"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "year"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "title"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "journal"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "volume"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "number"; warn_level = 1, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "pages"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "doi"; warn_level = 1, pop_warning = pop_warning);
 
     return new_entry
 end;
@@ -77,13 +80,14 @@ end;
 
 """
 
-    format_entry_book(entry::Dict{String, String})
+    format_entry_book(entry::Dict{String, String}; pop_warning::Bool = true)
 
 Format a book entry, given
 - `entry` Input entry
+- `pop_warning` Pop warning
 
 """
-function format_entry_book(entry::Dict{String, String})
+function format_entry_book(entry::Dict{String, String}; pop_warning::Bool = true)
     new_entry = OrderedDict{String, String}();
 
     # set the type and key
@@ -91,13 +95,13 @@ function format_entry_book(entry::Dict{String, String})
     new_entry["BIB_KEY"] = entry["BIB_KEY"];
 
     # add the fields to the new entry
-    sync_field!(entry, new_entry, "author"; warn_level = 2);
-    sync_field!(entry, new_entry, "year"; warn_level = 2);
-    sync_field!(entry, new_entry, "title"; warn_level = 2);
-    sync_field!(entry, new_entry, "edition"; warn_level = 0);
-    sync_field!(entry, new_entry, "editor"; warn_level = 2);
-    sync_field!(entry, new_entry, "publisher"; warn_level = 2);
-    sync_field!(entry, new_entry, "doi"; warn_level = 1);
+    sync_field!(entry, new_entry, "author"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "year"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "title"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "edition"; warn_level = 0, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "editor"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "publisher"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "doi"; warn_level = 1, pop_warning = pop_warning);
 
     return new_entry
 end;
@@ -105,13 +109,14 @@ end;
 
 """
 
-    format_entry_dataset(entry::Dict{String, String})
+    format_entry_dataset(entry::Dict{String, String}; pop_warning::Bool = true)
 
 Format a dataset entry, given
 - `entry` Input entry
+- `pop_warning` Pop warning
 
 """
-function format_entry_dataset(entry::Dict{String, String})
+function format_entry_dataset(entry::Dict{String, String}; pop_warning::Bool = true)
     new_entry = OrderedDict{String, String}();
 
     # set the type and key
@@ -119,11 +124,11 @@ function format_entry_dataset(entry::Dict{String, String})
     new_entry["BIB_KEY"] = entry["BIB_KEY"];
 
     # add the fields to the new entry
-    sync_field!(entry, new_entry, "author"; warn_level = 2);
-    sync_field!(entry, new_entry, "year"; warn_level = 2);
-    sync_field!(entry, new_entry, "title"; warn_level = 2);
-    sync_field!(entry, new_entry, "journal"; warn_level = 2);
-    sync_field!(entry, new_entry, "doi"; warn_level = 2);
+    sync_field!(entry, new_entry, "author"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "year"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "title"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "journal"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "doi"; warn_level = 2, pop_warning = pop_warning);
 
     return new_entry
 end;
@@ -131,13 +136,14 @@ end;
 
 """
 
-    format_entry_incollection(entry::Dict{String, String})
+    format_entry_incollection(entry::Dict{String, String}; pop_warning::Bool = true)
 
 Format an incollection entry, given
 - `entry` Input entry
+- `pop_warning` Pop warning
 
 """
-function format_entry_incollection(entry::Dict{String, String})
+function format_entry_incollection(entry::Dict{String, String}; pop_warning::Bool = true)
     new_entry = OrderedDict{String, String}();
 
     # set the type and key
@@ -145,14 +151,14 @@ function format_entry_incollection(entry::Dict{String, String})
     new_entry["BIB_KEY"] = entry["BIB_KEY"];
 
     # add the fields to the new entry
-    sync_field!(entry, new_entry, "author"; warn_level = 2);
-    sync_field!(entry, new_entry, "year"; warn_level = 2);
-    sync_field!(entry, new_entry, "title"; warn_level = 2);
-    sync_field!(entry, new_entry, "booktitle"; warn_level = 2);
-    sync_field!(entry, new_entry, "editor"; warn_level = 0);
-    sync_field!(entry, new_entry, "publisher"; warn_level = 2);
-    sync_field!(entry, new_entry, "pages"; warn_level = 2);
-    sync_field!(entry, new_entry, "doi"; warn_level = 1);
+    sync_field!(entry, new_entry, "author"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "year"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "title"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "booktitle"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "editor"; warn_level = 0, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "publisher"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "pages"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "doi"; warn_level = 1, pop_warning = pop_warning);
 
     return new_entry
 end;
@@ -160,31 +166,32 @@ end;
 
 """
 
-    format_entry(entry::Dict{String, String})
+    format_entry(entry::Dict{String, String}; pop_warning::Bool = true)
 
 Format an entry, given
 - `entry` Input entry
+- `pop_warning` Pop warning
 
 """
-function format_entry(entry::Dict{String, String})
+function format_entry(entry::Dict{String, String}; pop_warning::Bool = true)
     # if entry type is an article
     if lowercase(entry["BIB_TYPE"]) == "article"
-        return format_entry_article(entry);
+        return format_entry_article(entry; pop_warning = pop_warning);
     end;
 
     # if the entry type is a book
     if lowercase(entry["BIB_TYPE"]) == "book"
-        return format_entry_book(entry);
+        return format_entry_book(entry; pop_warning = pop_warning);
     end;
 
     # if the entry type is a dataset
     if lowercase(entry["BIB_TYPE"]) == "dataset"
-        return format_entry_dataset(entry);
+        return format_entry_dataset(entry; pop_warning = pop_warning);
     end;
 
     # if the entry type is an incollection or inproceedings
     if lowercase(entry["BIB_TYPE"]) == "incollection" || lowercase(entry["BIB_TYPE"]) == "inproceedings"
-        return format_entry_incollection(entry);
+        return format_entry_incollection(entry; pop_warning = pop_warning);
     end;
 
     # otherwise, post an error

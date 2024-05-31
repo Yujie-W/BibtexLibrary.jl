@@ -1,15 +1,16 @@
 """
 
-    formatted_library(dicts::Vector{Dict{String,String}})
+    formatted_library(dicts::Vector{Dict{String,String}}; pop_warning::Bool = true)
 
 Format the Vector of Dict to a new Dict of OrderedDict (so as to join), given
 - `dicts` Vector of dictionaries
+- `pop_warning` Pop warning if found during `format_entry` process
 
 """
-function formatted_library(dicts::Vector{Dict{String,String}})
+function formatted_library(dicts::Vector{Dict{String,String}}; pop_warning::Bool = true)
     library = Dict{String, OrderedDict{String, String}}();
     for dict in dicts
-        newdict = format_entry(dict);
+        newdict = format_entry(dict; pop_warning = pop_warning);
 
         # if the key already exists in the library, throw an error
         if haskey(library, newdict["BIB_KEY"])

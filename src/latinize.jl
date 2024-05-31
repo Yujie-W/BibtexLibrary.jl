@@ -8,6 +8,7 @@ Convert a Unicode character to a Latin string, given
 """
 function unicode_to_latin(c::Char)
     if UInt(c) > 0x7f
+        # general Unicode characters
         if c == '‐'                 # hyphen
             return "-"
         elseif c == '–'             # en dash
@@ -16,6 +17,12 @@ function unicode_to_latin(c::Char)
             return "\$-\$"
         elseif c == '·'             # middle dot
             return "\$\\cdot\$"
+        elseif c == '×'             # multiplication sign
+            return "\$\\times\$"
+        elseif c == '’'
+            return "'"
+        elseif c == ' '
+            return ' '
         # Greek letters
         elseif c == 'μ'
             return "\$\\mu\$"
