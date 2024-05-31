@@ -58,8 +58,8 @@ function format_entry_article(entry::Dict{String, String})
     new_entry = OrderedDict{String, String}();
 
     # set the type and key
-    new_entry["type"] = "article";
-    new_entry["key"] = entry["BIB_KEY"];
+    new_entry["BIB_TYPE"] = "article";
+    new_entry["BIB_KEY"] = entry["BIB_KEY"];
 
     # add the fields to the new entry
     sync_field!(entry, new_entry, "author"; warn_level = 2);
@@ -87,8 +87,8 @@ function format_entry_book(entry::Dict{String, String})
     new_entry = OrderedDict{String, String}();
 
     # set the type and key
-    new_entry["type"] = "book";
-    new_entry["key"] = entry["BIB_KEY"];
+    new_entry["BIB_TYPE"] = "book";
+    new_entry["BIB_KEY"] = entry["BIB_KEY"];
 
     # add the fields to the new entry
     sync_field!(entry, new_entry, "author"; warn_level = 2);
@@ -115,8 +115,8 @@ function format_entry_dataset(entry::Dict{String, String})
     new_entry = OrderedDict{String, String}();
 
     # set the type and key
-    new_entry["type"] = "dataset";
-    new_entry["key"] = entry["BIB_KEY"];
+    new_entry["BIB_TYPE"] = "dataset";
+    new_entry["BIB_KEY"] = entry["BIB_KEY"];
 
     # add the fields to the new entry
     sync_field!(entry, new_entry, "author"; warn_level = 2);
@@ -141,8 +141,8 @@ function format_entry_incollection(entry::Dict{String, String})
     new_entry = OrderedDict{String, String}();
 
     # set the type and key
-    new_entry["type"] = "incollection";
-    new_entry["key"] = entry["BIB_KEY"];
+    new_entry["BIB_TYPE"] = "incollection";
+    new_entry["BIB_KEY"] = entry["BIB_KEY"];
 
     # add the fields to the new entry
     sync_field!(entry, new_entry, "author"; warn_level = 2);
