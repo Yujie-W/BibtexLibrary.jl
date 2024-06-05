@@ -21,7 +21,7 @@ function unicode_to_latin(c::Char)
             return "\$\\times\$"
         elseif c == '’'
             return "'"
-        elseif c == ' '
+        elseif c == ' '
             return ' '
         # Greek letters
         elseif c == 'μ'
@@ -41,9 +41,11 @@ function unicode_to_latin(c::Char)
             return "{\\\"o}"
         elseif c == 'Ü'
             return "{\\\"U}"
+        # Subscripts
+        elseif c == '₂'
+            return "\$_2\$"
         else
-            @error "Character '$c' not supported, please add the support before forwarding!"
-            return c
+            return error("Character '$c' not supported, please add the support before forwarding!");
         end;
     else
         return c

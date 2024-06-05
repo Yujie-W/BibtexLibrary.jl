@@ -14,7 +14,7 @@ function formatted_library(dicts::Vector{Dict{String,String}}; pop_warning::Bool
 
         # if the key already exists in the library, throw an error
         if haskey(library, newdict["BIB_KEY"])
-            @error "Duplicate key found in the library: $(newdict["BIB_KEY"])";
+            @warn "Duplicate key found in the library: $(newdict["BIB_KEY"])";
         else
             library[newdict["BIB_KEY"]] = newdict;
         end;

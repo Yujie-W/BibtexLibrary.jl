@@ -8,3 +8,6 @@ docs/build/*
 *.log
 *.pdf
 *.synctex.gz
+
+# cache files
+cache*

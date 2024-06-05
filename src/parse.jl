@@ -32,7 +32,7 @@ function get_key_field(line::String)
 
     # make sure the key does not contain any space, '{', or '}'
     if occursin(" ", tempkey) || occursin("{", tempkey) || occursin("}", tempkey)
-        @error "Key contains invalid characters: $tempkey";
+        error("Key contains invalid characters: $tempkey");
     else
         key = tempkey;
     end;
@@ -44,7 +44,7 @@ function get_key_field(line::String)
         if tempfield[end] == '}'
             tempfield = tempfield[1:end-1];
         else
-            @error "Field does not contain the same number of '{' and '}' means it is the end of an entry. But this is not the case: $tempfield";
+            error("Field does not contain the same number of '{' and '}' means it is the end of an entry. But this is not the case: $tempfield");
         end;
     end;
 
@@ -98,7 +98,7 @@ function parse_bibtex_file(infile::String)
 
                 # if the first character is '@', it means last entry was not terminated properly
                 if line[1] == '@'
-                    @error "Last entry not terminated properly" line;
+                    error("Last entry not terminated properly: $line");
                 end;
 
                 # otherwise, it is a key-field pair

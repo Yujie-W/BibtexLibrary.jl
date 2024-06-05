@@ -25,11 +25,11 @@ function sync_field!(entry_from::Dict{String, String}, entry_to::OrderedDict{Str
         # if the field is doi
         elseif field == "doi"
             if occursin("https://doi.org/", entry_from["doi"])
-                entry_to["doi"] = entry_from["doi"];
+                entry_to["doi"] = replace(entry_from["doi"], "https://doi.org/" => "");
             elseif entry_from["doi"][2:4] == "10."
-                entry_to["doi"] = "{https://doi.org/$(entry_from["doi"][2:end-1])}";
+                entry_to["doi"] = entry_from["doi"];
             else
-                @error "DOI field is not in the correct format in the entry: $(entry_from["BIB_KEY"])";
+                error("DOI field is not in the correct format in the entry: $(entry_from["BIB_KEY"])");
             end;
 
         # otherwise, just copy the field
@@ -38,7 +38,7 @@ function sync_field!(entry_from::Dict{String, String}, entry_to::OrderedDict{Str
         end;
     elseif pop_warning
         if warn_level == 2
-            @error "Field $field is missing in the entry: $(entry_from["BIB_KEY"])";
+            error("Field $field is missing in the entry: $(entry_from["BIB_KEY"])");
         elseif warn_level == 1
             @warn "Field $field is missing in the entry: $(entry_from["BIB_KEY"])";
         end;
@@ -136,6 +136,34 @@ end;
 
 """
 
+    format_entry_misc(entry::Dict{String, String}; pop_warning::Bool = true)
+
+Format a dataset entry, given
+- `entry` Input entry
+- `pop_warning` Pop warning
+
+"""
+function format_entry_misc(entry::Dict{String, String}; pop_warning::Bool = true)
+    new_entry = OrderedDict{String, String}();
+
+    # set the type and key
+    new_entry["BIB_TYPE"] = "misc";
+    new_entry["BIB_KEY"] = entry["BIB_KEY"];
+
+    # add the fields to the new entry
+    sync_field!(entry, new_entry, "author"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "year"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "title"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "type"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "publisher"; warn_level = 2, pop_warning = pop_warning);
+    sync_field!(entry, new_entry, "doi"; warn_level = 2, pop_warning = pop_warning);
+
+    return new_entry
+end;
+
+
+"""
+
     format_entry_incollection(entry::Dict{String, String}; pop_warning::Bool = true)
 
 Format an incollection entry, given
@@ -192,6 +220,11 @@ function format_entry(entry::Dict{String, String}; pop_warning::Bool = true)
     # if the entry type is an incollection or inproceedings
     if lowercase(entry["BIB_TYPE"]) == "incollection" || lowercase(entry["BIB_TYPE"]) == "inproceedings"
         return format_entry_incollection(entry; pop_warning = pop_warning);
+    end;
+
+    # if the entry type is a misc
+    if lowercase(entry["BIB_TYPE"]) == "misc"
+        return format_entry_misc(entry; pop_warning = pop_warning);
     end;
 
     # otherwise, post an error
