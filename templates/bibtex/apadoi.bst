@@ -32,8 +32,9 @@ ENTRY
     journal         % mandatory for article
     number          % optional for article
     pages           % mandatory for article and incollection
-    publisher       % mandatory for book and incollection
+    publisher       % mandatory for book, incollection, and misc (datasets)
     title           % mandatory for all
+    type            % mandatory for dataset (misc type)
     volume          % mandatory for article
     year            % mandatory for all
   }
@@ -204,6 +205,23 @@ FUNCTION {write.incollection.info}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+% Function to write down the misc details (dataset)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+FUNCTION {write.misc.info}
+{
+  title "t" change.case$ write$
+  " [" write$
+  type write$
+  "]" add.period$ write$
+  " {\em " write$
+  publisher write$
+  "}. " write$
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
 % Write DOI to the end of line
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -212,7 +230,7 @@ FUNCTION {write.doi}
   doi empty$
     'skip$
     {
-      " " write$
+      " https://doi.org/" write$
       doi write$
     }
   if$
@@ -286,6 +304,21 @@ FUNCTION {incollection}
   write.bibitem.preface
   write.author.year
   write.incollection.info
+  write.doi
+  write.bibitem.end
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% An all-in-one function for misc
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+FUNCTION {misc}
+{
+  write.bibitem.preface
+  write.author.year
+  write.misc.info
   write.doi
   write.bibitem.end
 }
