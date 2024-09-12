@@ -1,91 +1,22 @@
-\documentclass[letterpaper,12pt]{article}
+\documentclass[nummaxdoi]{emerald}
 
-% Disable the \showhypens warnings, use with package microtype
-\let\CheckCommand\providecommand
-
-\usepackage{amsmath}
-\usepackage{bm}
-\usepackage{enumitem}
-\usepackage{geometry}
-	\geometry{top=2.6cm,bottom=2.6cm,left=2.6cm,right=2.6cm}
-\usepackage{graphicx}
-\usepackage{indentfirst}
-	\setlength\parindent{3em}
-\usepackage{lineno}
-	\linenumbers
-	%\modulolinenumbers[5]
-\usepackage{microtype}
-\usepackage{multirow}
-\usepackage[round, compress]{natbib}
-	\renewcommand{\bibsection}{\section*{REFERENCES}}
-\usepackage{setspace}
-	\setstretch{2.0}
-\usepackage{soul}
-\usepackage{titlesec}
-	\titleformat{\section}{\bfseries\normalfont}{\bfseries\thesection}{1em}{\bfseries}
-	\titleformat{\subsection}{\bfseries\normalfont}{\bfseries\thesubsection}{1em}{\bfseries}
-	\titleformat{\subsubsection}{\bfseries\normalfont}{\bfseries\thesubsubsection}{1em}{\bfseries}
-	\titlespacing*{\section}{0pt}{2\baselineskip}{0pt}
-	\titlespacing*{\subsection}{0pt}{1\baselineskip}{0pt}
-	\titlespacing*{\subsubsection}{0pt}{1\baselineskip}{0pt}
-\usepackage{upgreek}
-\usepackage{xcolor}
-
-% switch among fonts
-%\usepackage{mathpazo}
-%\usepackage{times}
-%\usepackage{txfonts}
-\usepackage[scaled]{helvet}
-\renewcommand\familydefault{\sfdefault}
-\usepackage[T1]{fontenc}
-\usepackage{sfmath}
-
-% Use customized Figure and Table label: Fig. 1 ... and Table 1 ...
-% This template does not use \caption to make it compatible with lineno package
-\makeatletter
-\renewcommand{\figurename}{Fig.}
-\long\def\@makecaption#1#2{%
-  \vskip\abovecaptionskip\normalsize
-  \sbox\@tempboxa{#1: #2}%
-  \ifdim \wd\@tempboxa >\hsize
-    \textbf{#1} #2\par
-  \else
-    \centering
-    \textbf{#1} #2\par
-  \fi
-  \vskip\belowcaptionskip}
-\makeatother
-
-% Raggedright with indent
-%\raggedright
-%\setlength\parindent{3em}
-
-% To penalize hyphen
-\tolerance=1
-\emergencystretch=\maxdimen
-\hyphenpenalty=10000
-\hbadness=10000
 
 
 
 
 \begin{document}
 
-\setlength{\abovedisplayskip}{0pt}
-\setlength{\belowdisplayskip}{0pt}
+
+% Test new title page
+\title{This is a test title to use with the template}
+\authors{Yujie Wang\affil{1,*} and Christian Frankenberg\affil{1,2}}
+\affiliation{1}{\caltechgps}
+\affiliation{2}{\caltechjpl}
+\correspondingauthors{Yujie Wang (wyujie@caltech.edu)}
 
 
 
 
-% Title page
-{
-\centering
-\par \noindent Title
-\par \noindent Author$^{1,*}$
-
-\flushleft
-\par \noindent $^{1}$ Institute
-\par \noindent $^{*}$ Author for correspondence. Email: , Telephone:
 
 % Commonly used institutes
 %
@@ -102,21 +33,7 @@
 %
 % Author for correspondence. Email: , Telephone:
 
-\begin{center}
-\par Statistics
 
-\begin{tabular}{lr}
-\hline
-Summary					& words\\
-Main Text				& words\\
-\hline
-Number of Figures		&\\
-Number of Tables		&\\
-Supporting Information	&\\
-\hline
-\end{tabular}
-\end{center}
-}
 
 
 
@@ -134,7 +51,9 @@ Supporting Information	&\\
 % Introduction
 \clearpage
 \section{INTRODUCTION}
-\par Some text. A citation \citep{wang2015stem}. Citation with some text \citep[here is some text before the citation;][]{wang2015stem}. Citation with some text again \citep[][some text after the citation]{holtta2017steady}
+\par Cite a regular journal paper here \citep{Wang-2020-Stomatal-Optimality}. Cite a book here \citep{tyree2002xylem}. Cite an incollection here \citep{Rouse-1973-NDVI}. Cite a dataset here \citep{CliMA-Land-Code, Wang-2020-Stomatal-Optimality}.
+
+\par Cite a paper with more than 6 authors here \citep{Clark-2011-JULES}!
 
 
 
@@ -211,8 +130,7 @@ Supporting Information	&\\
 % References
 \clearpage
 \begin{singlespace}
-\bibliographystyle{pce}
-\bibliography{../../data/sample_1, ../../data/sample_2}
+\bibliography{zotero}
 \end{singlespace}
 
 
