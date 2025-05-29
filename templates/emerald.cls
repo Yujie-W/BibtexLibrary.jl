@@ -13,7 +13,6 @@
 \RequirePackage{graphicx}
 \RequirePackage{helvet}
 \RequirePackage{indentfirst}
-    \setlength\parindent{3em}
 \RequirePackage{inputenc}
     \PassOptionsToPackage{utf8}{inputenc}
 \RequirePackage{lineno}
@@ -113,6 +112,7 @@
 \setstretch{1.5}
 \setlength{\abovedisplayskip}{0pt}
 \setlength{\belowdisplayskip}{0pt}
+\setlength{\parindent}{3em}
 
 
 
